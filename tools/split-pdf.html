@@ -1,1 +1,254 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Split PDF — PDF Tools</title><meta name="description" content="Extract selected pages or ranges into a new PDF."><link rel="canonical" href="https://pdf.bishnulamsal.com.np/tools/split-pdf.html"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="../css/main.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script type="module">import * as p from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";window.pdfjsLib=p;p.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";window.dispatchEvent(new Event("pdfjs-ready"));</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script><script src="../js/core.js" defer></script><script src="../js/file-utils.js" defer></script><script src="../js/pdf-engine.js" defer></script></head><body data-tool="split-pdf"><div class="loader"><div><div class="spinner"></div><div class="muted" style="text-align:center;margin-top:12px">Loading PDF workspace…</div></div></div><header class="h"><div class="c hi"><a class="brand" href="../"><span class="mark">PDF</span><span>PDF Tools</span></a><nav class="nav"><a href="../"><i class="fa-solid fa-house"></i> Home</a><a href="../#tools"><i class="fa-solid fa-grid-2"></i> Tools</a><a href="../about.html">About</a><a href="../faq.html">FAQ</a><button class="icon" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></nav><button class="icon mob" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></div></header><main class="shell"><div class="c"><div class="head fade-up"><div><span class="ey"><i class="fa-solid fa-bolt"></i> Browser-first tool</span><h1>Split PDF</h1><p class="muted">Extract selected pages or ranges into a new PDF.</p></div><a class="btn ghost" href="../#tools"><i class="fa-solid fa-arrow-left"></i> All tools</a></div><div class="ad">Advertisement</div><div class="tool-layout"><section><div class="card workspace fade-up"><div class="drop" id="drop"><div><div class="drop-icon"><i class="fa-solid fa-scissors"></i></div><h2>Drop your PDF here</h2><p>or choose from your device — processing stays in your browser</p><button class="btn primary" id="choose"><i class="fa-solid fa-folder-open"></i> Choose PDF</button><input id="fileInput" class="sr-only" type="file" accept="application/pdf" ></div></div><div id="files" class="files"></div><div class="form"><div class="field"><label for="ranges">Page ranges</label><input id="ranges" placeholder="Example: 1-3, 5, 8-10"><small>Use commas and ranges.</small></div></div><div class="actions"><button id="run" class="btn primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Process & Download</button><button id="clear" class="btn ghost"><i class="fa-solid fa-rotate-left"></i> Reset</button></div><div class="progress-wrap"><div class="progress"><div id="progressBar" class="bar"></div></div><div class="meta"><span id="progressStatus">Ready when you are</span><span id="progressText">0%</span></div></div><div class="notice"><i class="fa-solid fa-lock"></i> Your selected files are processed locally in your browser. No upload endpoint is required for the core operations.</div></div></section><aside class="card workspace preview-panel fade-up"><div class="preview-toolbar"><div><strong><i class="fa-regular fa-eye"></i> Smart preview</strong><div class="muted" style="font-size:.8rem">Live, responsive and selection-aware</div></div><div class="preview-tools"><button class="icon" id="zoomOut" title="Zoom out"><i class="fa-solid fa-minus"></i></button><button class="icon" id="zoomReset" title="Reset zoom"><i class="fa-solid fa-expand"></i></button><button class="icon" id="zoomIn" title="Zoom in"><i class="fa-solid fa-plus"></i></button></div></div><div class="preview" id="preview"><div class="empty-preview"><div><i class="fa-regular fa-file-pdf"></i><div>Preview pages will appear here</div><small>Upload a PDF to preview, zoom and select pages.</small></div></div></div></aside></div><div class="ad">Advertisement</div></div></main><footer class="foot"><div class="c fg"><section><b>PDF Tools</b><p class="muted">Fast, private, browser-first PDF utilities.</p></section><section><b>Popular tools</b><div class="links"><a href="merge-pdf.html">Merge</a><a href="split-pdf.html">Split</a><a href="compress-pdf.html">Compress</a><a href="pdf-to-jpg.html">PDF to JPG</a></div></section><section><b>Information</b><div class="links"><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../faq.html">FAQ</a></div></section></div><div class="c muted" style="margin-top:25px">© <span data-year></span> PDF Tools</div></footer><script src="../js/tools/app.js" defer></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Split PDF — PDF Tools</title><meta name="description" content="Extract selected pages or ranges into a new PDF."><link rel="canonical" href="https://pdf.bishnulamsal.com.np/tools/split-pdf.html"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="../css/main.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script type="module">import * as p from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";window.pdfjsLib=p;p.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";window.dispatchEvent(new Event("pdfjs-ready"));</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script><script src="../js/core.js" defer></script><script src="../js/file-utils.js" defer></script><script src="../js/pdf-engine.js" defer></script></head><body data-tool="split-pdf"><div class="loader"><div><div class="spinner"></div><div class="muted" style="text-align:center;margin-top:12px">Loading PDF workspace…</div></div></div><header class="h"><div class="c hi"><a class="brand" href="../"><span class="mark">PDF</span><span>PDF Tools</span></a><nav class="nav"><a href="../"><i class="fa-solid fa-house"></i> Home</a><a href="../#tools"><i class="fa-solid fa-grid-2"></i> Tools</a><a href="../about.html">About</a><a href="../faq.html">FAQ</a><button class="icon" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></nav><button class="icon mob" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></div></header>
+  
+  <main class="shell"><div class="c">
+    
+    
+    <!--<div class='separator' style='display:none'> <img alt='QR Code Generator' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmX9BqPHlZUB-Gb8mpiMW9HMFo7mKjhtW1qDMsdjB9bEJUA2NYe8DU3SfNqinRtc5WHGgYmev2mbyXVTPLVmYsCXTaCuxkD3z3rFWbxsqKJ8fmQBdbzRbZ3cXzI4yAYkwUlO1bzudHKH93Z5uoMqRnIwpJhueBrDE6qUarIMaVAogSUQGU5NLJlgVKdlGn/s1600/pdf-to-image.png'/></div>--> 
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+
+    <style>
+        .orange-theme { background: #f97316; }
+        .page-card { transition: all 0.2s; border: 3px solid transparent; }
+        .page-card.selected { border-color: #f97316; background: #fff7ed; }
+        .sortable-ghost { opacity: 0.1; background: #fdba74; }
+        .rotate-view { transition: transform 0.3s ease; }
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #f97316; border-radius: 10px; }
+      	.onPg .blogM .mainbar { max-width: 100%; }
+    </style>
+
+
+<div class="max-w-7xl mx-auto bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col h-[92vh] border border-orange-100">
+    
+    <div class="orange-theme p-5 text-white flex flex-wrap justify-between items-center gap-4 shrink-0 shadow-lg">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-solid fa-scissors text-xl"></i>
+            <h1 class="text-xl font-black uppercase tracking-tighter">PDF <span class="text-orange-100">Split</span></h1>
+        </div>
+        
+        <div class="flex items-center gap-3">
+            <button onclick="document.getElementById('fileInput').click()" class="bg-white text-orange-600 px-6 py-2 rounded-xl text-xs font-black hover:scale-105 transition shadow-md uppercase">Add File</button>
+            <button id="downloadBtn" disabled class="bg-slate-900 text-white px-6 py-2 rounded-xl text-xs font-black hover:bg-black transition disabled:bg-slate-400 shadow-xl uppercase">Export Selected</button>
+        </div>
+    </div>
+
+    <div class="flex flex-grow overflow-hidden">
+        <div class="w-64 border-r border-orange-100 bg-orange-50/20 p-6 hidden lg:flex flex-col gap-8 shrink-0">
+            <div>
+                <label class="text-[10px] font-black text-orange-600 uppercase tracking-widest block mb-4">Bulk Selection</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="bulkAction('select')" class="bg-white border border-orange-200 p-2 rounded-lg text-[9px] font-bold uppercase hover:bg-orange-50">Select All</button>
+                    <button onclick="bulkAction('deselect')" class="bg-white border border-orange-200 p-2 rounded-lg text-[9px] font-bold uppercase hover:bg-orange-50">Clear</button>
+                </div>
+            </div>
+
+            <div class="p-4 bg-white rounded-2xl border border-orange-100 shadow-sm">
+                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-3">Auto-Split Every</label>
+                <div class="flex items-center gap-2">
+                    <input type="number" id="splitInterval" value="2" min="1" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-sm focus:ring-2 focus:ring-orange-500 outline-none">
+                    <span class="text-[10px] font-bold text-slate-400">Pgs</span>
+                </div>
+                <button onclick="autoSplitDownload()" class="w-full mt-3 bg-orange-100 text-orange-600 p-2 rounded-lg text-[9px] font-black uppercase hover:bg-orange-200 transition">Download ZIP</button>
+            </div>
+
+            <div class="mt-auto">
+                <p class="text-[9px] font-bold text-slate-300 uppercase leading-relaxed">
+                    <i class="fa-solid fa-lock mr-1"></i> Private Processing<br>
+                    Files never leave your device.
+                </p>
+            </div>
+        </div>
+
+        <div class="flex-grow flex flex-col min-w-0">
+            <div id="workspace" class="flex-grow overflow-y-auto custom-scroll p-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8 content-start">
+                <div id="empty-state" class="col-span-full py-40 text-center text-orange-200">
+                    <i class="fa-solid fa-file-circle-plus text-7xl mb-6 opacity-30"></i>
+                    <p class="font-bold uppercase text-sm tracking-widest">Workspace is empty</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="file" id="fileInput" class="hidden" accept=".pdf"/>
+
+<script>
+    const { PDFDocument, degrees } = PDFLib;
+    const workspace = document.getElementById('workspace');
+    const fileInput = document.getElementById('fileInput');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    let pageList = []; 
+
+    new Sortable(workspace, {
+        animation: 200,
+        ghostClass: 'sortable-ghost',
+        draggable: '.page-card',
+        onEnd: () => {
+            const currentIds = Array.from(workspace.querySelectorAll('.page-card')).map(el => el.id);
+            pageList = currentIds.map(id => pageList.find(p => p.id === id));
+        }
+    });
+
+    fileInput.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        document.getElementById('empty-state').classList.add('hidden');
+
+        const buffer = await file.arrayBuffer();
+        const pdfData = new Uint8Array(buffer);
+        const pdf = await pdfjsLib.getDocument({ data: pdfData.slice(0) }).promise;
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+            const id = "pg-" + Math.random().toString(36).substr(2, 9);
+            const pageObj = { id, buffer: pdfData, pageNum: i, rotation: 0, selected: true };
+            pageList.push(pageObj);
+            await createThumb(pageObj, pdf);
+        }
+        updateUI();
+        fileInput.value = '';
+    };
+
+    async function createThumb(pageObj, pdf) {
+        const page = await pdf.getPage(pageObj.pageNum);
+        const viewport = page.getViewport({ scale: 0.35 });
+        const canvas = document.createElement('canvas');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+        const card = document.createElement('div');
+        card.id = pageObj.id;
+        card.className = "page-card selected bg-white rounded-2xl p-2 shadow-sm cursor-pointer hover:shadow-lg";
+        card.onclick = (e) => { if(!e.target.closest('button')) toggleSelection(pageObj.id); };
+        
+        card.innerHTML = `
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden bg-orange-50 flex items-center justify-center">
+                <img id="img-${pageObj.id}" src="${canvas.toDataURL()}" class="rotate-view max-w-full max-h-full pointer-events-none">
+                <div class="absolute top-2 right-2 bg-orange-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[8px] shadow-lg border border-white check-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="absolute inset-0 bg-orange-900/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                    <button onclick="rotatePg('${pageObj.id}')" class="w-8 h-8 bg-white text-orange-600 rounded-lg shadow-lg hover:bg-orange-500 hover:text-white transition"><i class="fa-solid fa-rotate-right"></i></button>
+                    <button onclick="deletePg('${pageObj.id}')" class="w-8 h-8 bg-white text-rose-500 rounded-lg shadow-lg hover:bg-rose-500 hover:text-white transition"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <p class="text-[9px] font-black text-center mt-2 text-slate-400">PAGE ${pageObj.pageNum}</p>
+        `;
+        workspace.appendChild(card);
+    }
+
+    window.toggleSelection = (id) => {
+        const p = pageList.find(x => x.id === id);
+        p.selected = !p.selected;
+        const card = document.getElementById(id);
+        card.classList.toggle('selected', p.selected);
+        card.querySelector('.check-icon').style.display = p.selected ? 'flex' : 'none';
+        updateUI();
+    };
+
+    window.rotatePg = (id) => {
+        const p = pageList.find(x => x.id === id);
+        p.rotation = (p.rotation + 90) % 360;
+        document.getElementById(`img-${id}`).style.transform = `rotate(${p.rotation}deg)`;
+    };
+
+    window.deletePg = (id) => {
+        pageList = pageList.filter(x => x.id !== id);
+        document.getElementById(id).remove();
+        updateUI();
+    };
+
+    window.bulkAction = (type) => {
+        pageList.forEach(p => {
+            p.selected = (type === 'select');
+            const card = document.getElementById(p.id);
+            card.classList.toggle('selected', p.selected);
+            card.querySelector('.check-icon').style.display = p.selected ? 'flex' : 'none';
+        });
+        updateUI();
+    };
+
+    function updateUI() {
+        const selCount = pageList.filter(p => p.selected).length;
+        downloadBtn.disabled = selCount === 0;
+        downloadBtn.innerText = `EXPORT ${selCount} PAGES`;
+    }
+
+    // --- AUTO-SPLIT ZIP FEATURE ---
+    window.autoSplitDownload = async () => {
+        const interval = parseInt(document.getElementById('splitInterval').value);
+        if(!pageList.length || interval < 1) return;
+        
+        const zip = new JSZip();
+        const sourceMap = new Map();
+
+        for (let i = 0; i < pageList.length; i += interval) {
+            const chunk = pageList.slice(i, i + interval);
+            const newPdf = await PDFDocument.create();
+            
+            for (const p of chunk) {
+                if (!sourceMap.has(p.buffer)) sourceMap.set(p.buffer, await PDFDocument.load(p.buffer.slice(0)));
+                const [copied] = await newPdf.copyPages(sourceMap.get(p.buffer), [p.pageNum - 1]);
+                if (p.rotation !== 0) copied.setRotation(degrees(copied.getRotation().angle + p.rotation));
+                newPdf.addPage(copied);
+            }
+            
+            const bytes = await newPdf.save();
+            zip.file(`Split_Part_${(i/interval)+1}.pdf`, bytes);
+        }
+
+        const blob = await zip.generateAsync({type: "blob"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Auto_Split_PDF.zip`;
+        a.click();
+    };
+
+    downloadBtn.onclick = async () => {
+        const selected = pageList.filter(p => p.selected);
+        downloadBtn.innerText = "PROCESSING...";
+        downloadBtn.disabled = true;
+
+        try {
+            const mergedPdf = await PDFDocument.create();
+            const sourceMap = new Map();
+
+            for (const p of selected) {
+                if (!sourceMap.has(p.buffer)) sourceMap.set(p.buffer, await PDFDocument.load(p.buffer.slice(0)));
+                const [copied] = await mergedPdf.copyPages(sourceMap.get(p.buffer), [p.pageNum - 1]);
+                if (p.rotation !== 0) copied.setRotation(degrees(copied.getRotation().angle + p.rotation));
+                mergedPdf.addPage(copied);
+            }
+
+            const bytes = await mergedPdf.save();
+            const blob = new Blob([bytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Orange_Export_${Date.now()}.pdf`;
+            a.click();
+        } catch (err) {
+            alert(err.message);
+        } finally {
+            updateUI();
+        }
+    };
+</script>
+
+
+    
+    <div class="ad">Advertisement</div></div></main>
+  
+  
+  <footer class="foot"><div class="c fg"><section><b>PDF Tools</b><p class="muted">Fast, private, browser-first PDF utilities.</p></section><section><b>Popular tools</b><div class="links"><a href="merge-pdf.html">Merge</a><a href="split-pdf.html">Split</a><a href="compress-pdf.html">Compress</a><a href="pdf-to-jpg.html">PDF to JPG</a></div></section><section><b>Information</b><div class="links"><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../faq.html">FAQ</a></div></section></div><div class="c muted" style="margin-top:25px">© <span data-year></span> PDF Tools</div></footer><script src="../js/tools/app.js" defer></script></body></html>
