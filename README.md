@@ -1,41 +1,33 @@
-# PDF Tools — Static GitHub Pages Project
+# PDF Tools — GitHub-ready browser PDF toolkit
 
-A complete browser-first PDF tools website built with HTML, CSS and vanilla JavaScript. No Node.js, npm, database or backend is required.
+A static, browser-first PDF utilities site designed for GitHub Pages, Netlify or Vercel.
 
-## Quick GitHub setup
-1. Create a new GitHub repository.
-2. Upload **all files and folders in this project root**. Do not upload the ZIP itself.
-3. Commit to the `main` branch.
-4. In **Settings → Pages**, select **GitHub Actions** as the source.
-5. The included `.github/workflows/pages.yml` deploys the site automatically.
+## UI/UX highlights
+- Tailwind CSS CDN + custom responsive design system
+- Blue/teal visual theme with light/dark mode
+- Font Awesome icons
+- Mobile/tablet/desktop responsive layout
+- Animated loading screen, cards and progress states
+- Drag & drop file selection
+- Smart PDF page preview with page selection and zoom
+- Live HTML preview for HTML-to-PDF
+- Client-side processing with no required upload backend
 
-### Custom domain
-If you want `pdf.bishnulamsal.com.np`, create a file named `CNAME` in the repository root containing exactly:
+## Deploy to GitHub Pages
+1. Create a new repository.
+2. Upload the contents of this folder (not the ZIP itself).
+3. Commit to `main`.
+4. GitHub → Settings → Pages → Source: GitHub Actions.
+5. The included workflow deploys the site automatically.
 
-```text
-pdf.bishnulamsal.com.np
-```
-
-Then point the DNS record for the subdomain to GitHub Pages according to GitHub's current Pages instructions.
-
-## Structure
-- `index.html` — homepage
-- `tools/` — individual PDF tools
-- `css/main.css` — shared design system
-- `js/core.js` — theme/toast/progress utilities
-- `js/file-utils.js` — file/drop/download helpers
-- `js/pdf-engine.js` — PDF.js/pdf-lib integration
-- `js/tools/app.js` — tool functionality
-- `workers/` — worker entry point
-- `.github/workflows/pages.yml` — automatic GitHub Pages deployment
-- `.nojekyll` — prevents Jekyll processing
-- `robots.txt`, `sitemap.xml`, `ads.txt` — deployment/SEO files
-
-## External libraries
-The site uses pinned browser CDN releases for pdf-lib, PDF.js, JSZip, FileSaver.js, Font Awesome, html2canvas and jsPDF. For production, self-host the libraries if you want the site to remain functional when a CDN is unavailable.
+## Custom domain
+Rename `CNAME.example` to `CNAME`, then put `pdf.bishnulamsal.com.np` inside it and configure your DNS for GitHub Pages.
 
 ## Important limitations
 - Protect PDF does not fake encryption.
-- Compress/Unlock use raster rebuilding and may remove selectable text.
-- PDF-to-Word is a simple text-layer extraction rather than full DOCX reconstruction.
-- Sign PDF uses a typed signature overlay in this baseline.
+- Compress/Unlock use raster rebuilding and may lose selectable text.
+- PDF-to-Word exports extracted text to a Word-compatible `.doc`; complex layout/OCR is not reconstructed.
+- HTML-to-PDF is a browser render/export workflow.
+
+## CDN dependencies
+Font Awesome 7.3.1, Tailwind CSS CDN, pdf-lib 1.17.1, PDF.js 4.10.38, JSZip 3.10.2, FileSaver.js 2.0.5, html2canvas 1.4.1 and jsPDF 4.2.1.
