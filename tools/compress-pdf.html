@@ -1,1 +1,231 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Compress PDF — PDF Tools</title><meta name="description" content="Reduce PDF size using browser-side raster optimization. Text may become non-selectable."><link rel="canonical" href="https://pdf.bishnulamsal.com.np/tools/compress-pdf.html"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="../css/main.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script type="module">import * as p from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";window.pdfjsLib=p;p.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";window.dispatchEvent(new Event("pdfjs-ready"));</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script><script src="../js/core.js" defer></script><script src="../js/file-utils.js" defer></script><script src="../js/pdf-engine.js" defer></script></head><body data-tool="compress-pdf"><div class="loader"><div><div class="spinner"></div><div class="muted" style="text-align:center;margin-top:12px">Loading PDF workspace…</div></div></div><header class="h"><div class="c hi"><a class="brand" href="../"><span class="mark">PDF</span><span>PDF Tools</span></a><nav class="nav"><a href="../"><i class="fa-solid fa-house"></i> Home</a><a href="../#tools"><i class="fa-solid fa-grid-2"></i> Tools</a><a href="../about.html">About</a><a href="../faq.html">FAQ</a><button class="icon" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></nav><button class="icon mob" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></div></header><main class="shell"><div class="c"><div class="head fade-up"><div><span class="ey"><i class="fa-solid fa-bolt"></i> Browser-first tool</span><h1>Compress PDF</h1><p class="muted">Reduce PDF size using browser-side raster optimization. Text may become non-selectable.</p></div><a class="btn ghost" href="../#tools"><i class="fa-solid fa-arrow-left"></i> All tools</a></div><div class="ad">Advertisement</div><div class="tool-layout"><section><div class="card workspace fade-up"><div class="drop" id="drop"><div><div class="drop-icon"><i class="fa-solid fa-compress"></i></div><h2>Drop your PDF here</h2><p>or choose from your device — processing stays in your browser</p><button class="btn primary" id="choose"><i class="fa-solid fa-folder-open"></i> Choose PDF</button><input id="fileInput" class="sr-only" type="file" accept="application/pdf" ></div></div><div id="files" class="files"></div><div class="form"><div class="field"><label for="scale">Render scale</label><select id="scale"><option value="1">Standard</option><option value="1.25">Better quality</option><option value=".75">Smaller file</option></select></div><div class="field"><label for="quality">JPG quality</label><input id="quality" type="range" min=".45" max=".95" step=".05" value=".7"><small id="qualityVal">70%</small></div></div><div class="actions"><button id="run" class="btn primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Process & Download</button><button id="clear" class="btn ghost"><i class="fa-solid fa-rotate-left"></i> Reset</button></div><div class="progress-wrap"><div class="progress"><div id="progressBar" class="bar"></div></div><div class="meta"><span id="progressStatus">Ready when you are</span><span id="progressText">0%</span></div></div><div class="notice"><i class="fa-solid fa-circle-info"></i> This is a browser-first utility. Output quality can vary because PDFs can contain complex fonts, vectors, forms and layouts.</div></div></section><aside class="card workspace preview-panel fade-up"><div class="preview-toolbar"><div><strong><i class="fa-regular fa-eye"></i> Smart preview</strong><div class="muted" style="font-size:.8rem">Live, responsive and selection-aware</div></div><div class="preview-tools"><button class="icon" id="zoomOut" title="Zoom out"><i class="fa-solid fa-minus"></i></button><button class="icon" id="zoomReset" title="Reset zoom"><i class="fa-solid fa-expand"></i></button><button class="icon" id="zoomIn" title="Zoom in"><i class="fa-solid fa-plus"></i></button></div></div><div class="preview" id="preview"><div class="empty-preview"><div><i class="fa-regular fa-file-pdf"></i><div>Preview pages will appear here</div><small>Upload a PDF to preview, zoom and select pages.</small></div></div></div></aside></div><div class="ad">Advertisement</div></div></main><footer class="foot"><div class="c fg"><section><b>PDF Tools</b><p class="muted">Fast, private, browser-first PDF utilities.</p></section><section><b>Popular tools</b><div class="links"><a href="merge-pdf.html">Merge</a><a href="split-pdf.html">Split</a><a href="compress-pdf.html">Compress</a><a href="pdf-to-jpg.html">PDF to JPG</a></div></section><section><b>Information</b><div class="links"><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../faq.html">FAQ</a></div></section></div><div class="c muted" style="margin-top:25px">© <span data-year></span> PDF Tools</div></footer><script src="../js/tools/app.js" defer></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Compress PDF — PDF Tools</title><meta name="description" content="Reduce PDF size using browser-side raster optimization. Text may become non-selectable."><link rel="canonical" href="https://pdf.bishnulamsal.com.np/tools/compress-pdf.html"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="../css/main.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script type="module">import * as p from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";window.pdfjsLib=p;p.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";window.dispatchEvent(new Event("pdfjs-ready"));</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script><script src="../js/core.js" defer></script><script src="../js/file-utils.js" defer></script><script src="../js/pdf-engine.js" defer></script></head><body data-tool="compress-pdf"><div class="loader"><div><div class="spinner"></div><div class="muted" style="text-align:center;margin-top:12px">Loading PDF workspace…</div></div></div><header class="h"><div class="c hi"><a class="brand" href="../"><span class="mark">PDF</span><span>PDF Tools</span></a><nav class="nav"><a href="../"><i class="fa-solid fa-house"></i> Home</a><a href="../#tools"><i class="fa-solid fa-grid-2"></i> Tools</a><a href="../about.html">About</a><a href="../faq.html">FAQ</a><button class="icon" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></nav><button class="icon mob" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></div></header>
+  
+  
+  <main class="shell"><div class="c">
+    <div class="head fade-up"><div><span class="ey"><i class="fa-solid fa-bolt"></i> Browser-first tool</span><h1>Compress PDF</h1><p class="muted">Reduce PDF size using browser-side raster optimization. Text may become non-selectable.</p></div><a class="btn ghost" href="../#tools"><i class="fa-solid fa-arrow-left"></i> All tools</a></div><div class="ad">Advertisement</div>
+    
+    
+    
+
+<!--<div class='separator' style='display:none'> <img alt='QR Code Generator' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmX9BqPHlZUB-Gb8mpiMW9HMFo7mKjhtW1qDMsdjB9bEJUA2NYe8DU3SfNqinRtc5WHGgYmev2mbyXVTPLVmYsCXTaCuxkD3z3rFWbxsqKJ8fmQBdbzRbZ3cXzI4yAYkwUlO1bzudHKH93Z5uoMqRnIwpJhueBrDE6qUarIMaVAogSUQGU5NLJlgVKdlGn/s1600/pdf-to-image.png'/></div>-->
+
+
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+
+    <style>
+        .slider-accent { accent-color: #6366f1; }
+        .toggle-checkbox:checked { right: 0; border-color: #6366f1; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #6366f1; }
+      .pS p {margin: 1em 0;}
+         .onPg .blogM .mainbar { max-width: 100%; }
+
+    </style>
+
+<body class="bg-slate-50 p-8 font-sans text-slate-900">
+
+<div class=" mx-auto">
+    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
+        
+        <div class="bg-indigo-600 p-8 text-white flex flex-col md:flex-row justify-between items-center gap-4">
+                <div id="file-badge" class="hidden bg-white/20 border border-white/40 px-4 py-2 rounded-full text-white text-xs font-bold uppercase">
+                File Loaded
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12">
+            
+            <div class="lg:col-span-7 p-2 border-r border-slate-100">
+                <div id="dropzone" class="group border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center cursor-pointer hover:bg-slate-50 hover:border-indigo-400 transition-all mb-8">
+                    <input type="file" id="fileInput" class="hidden" accept=".pdf">
+                    <i class="fa-solid fa-file-pdf text-4xl text-indigo-400 mb-2"></i>
+                    <p id="fileName" class="font-bold text-slate-700">Select PDF</p>
+                </div>
+
+                <div class="space-y-8">
+                    <div>
+                        <div class="flex justify-between items-center">
+                            <label class="text-xs font-black text-slate-500 uppercase tracking-widest">Image Quality</label>
+                            <span id="qualityLabel" class="text-indigo-600 font-bold">70%</span>
+                        </div>
+                        <input type="range" id="qualitySlider" min="5" max="100" value="70" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-accent">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center ">
+                            <label class="text-xs font-black text-slate-500 uppercase tracking-widest">Resolution (DPI)</label>
+                            <span id="dpiLabel" class="text-indigo-600 font-bold">150 DPI</span>
+                        </div>
+                        <input type="range" id="dpiSlider" min="72" max="300" value="150" step="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-accent">
+                    </div>
+
+                    <div class="hidden flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-half-stroke text-slate-400"></i>
+                            <div>
+                                <p class="text-sm font-bold text-slate-700">Grayscale Mode</p>
+                                <p class="text-[10px] text-slate-400 uppercase">Reduces size significantly</p>
+                            </div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="grayscaleToggle" class="sr-only peer">
+                            <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 border-t border-slate-100 ">
+                    <div class="bg-slate-50 p-2 rounded-2xl text-center">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase">Current Size</p>
+                        <p id="size-orig" class="text-xl font-black text-slate-700">0 KB</p>
+                    </div>
+                    <div class="bg-indigo-50 p-2 rounded-2xl text-center border border-indigo-100">
+                        <p class="text-[10px] text-indigo-400 font-bold uppercase">Target Size</p>
+                        <p id="size-est" class="text-xl font-black text-indigo-600">0 KB</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-slate-50/50 p-8 flex flex-col justify-between">
+                <div>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase text-center mb-4 tracking-tighter">Live Sample Preview</p>
+                    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-inner flex items-center justify-center min-h-[300px] mb-6">
+                        <canvas id="previewCanvas" class="max-w-full max-h-full"></canvas>
+                    </div>
+                </div>
+
+                <button id="downloadBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white text-sm font-black p-2 rounded-2xl shadow-xl transition-all">
+                    DOWNLOAD COMPRESSED PDF
+                </button>
+                <div id="progressBox" class="hidden mt-4">
+                    <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                        <div id="progressBar" class="bg-indigo-600 h-full w-0 transition-all"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const { jsPDF } = window.jspdf;
+    const fileInput = document.getElementById('fileInput');
+    const qualitySlider = document.getElementById('qualitySlider');
+    const dpiSlider = document.getElementById('dpiSlider');
+    const grayToggle = document.getElementById('grayscaleToggle');
+    const previewCanvas = document.getElementById('previewCanvas');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    let currentPdf = null;
+    let originalSize = 0;
+
+    function formatSize(bytes) {
+        if (bytes === 0) return '0 KB';
+        const k = 1024;
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + (['Bytes', 'KB', 'MB', 'GB'][i]);
+    }
+
+    // --- NEW: SAMPLING ENGINE ---
+    // Instead of guessing, we process Page 1 and measure it.
+    async function updateAccuracy() {
+        if (!currentPdf) return;
+        
+        const q = qualitySlider.value / 100;
+        const dpiScale = dpiSlider.value / 72;
+        const page = await currentPdf.getPage(1);
+        const viewport = page.getViewport({ scale: dpiScale });
+        
+        const canvas = document.createElement('canvas');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        const ctx = canvas.getContext('2d');
+        
+        if (grayToggle.checked) ctx.filter = 'grayscale(100%)';
+        await page.render({ canvasContext: ctx, viewport }).promise;
+        
+        // Sample only the first page blob
+        canvas.toBlob((blob) => {
+            const sizePerPage = blob.size;
+            const estimatedTotal = (sizePerPage * currentPdf.numPages) * 0.95; // 0.95 factor for PDF overhead
+            
+            document.getElementById('size-orig').innerText = formatSize(originalSize);
+            document.getElementById('size-est').innerText = formatSize(estimatedTotal);
+            
+            // Also update preview
+            const previewCtx = previewCanvas.getContext('2d');
+            previewCanvas.height = viewport.height;
+            previewCanvas.width = viewport.width;
+            previewCtx.drawImage(canvas, 0, 0);
+        }, 'image/jpeg', q);
+
+        document.getElementById('qualityLabel').innerText = qualitySlider.value + "%";
+        document.getElementById('dpiLabel').innerText = dpiSlider.value + " DPI";
+    }
+
+    qualitySlider.oninput = updateAccuracy;
+    dpiSlider.oninput = updateAccuracy;
+    grayToggle.onchange = updateAccuracy;
+    document.getElementById('dropzone').onclick = () => fileInput.click();
+
+    fileInput.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        originalSize = file.size;
+        document.getElementById('fileName').innerText = file.name;
+        document.getElementById('file-badge').classList.remove('hidden');
+        const arrayBuffer = await file.arrayBuffer();
+        currentPdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+        updateAccuracy();
+    };
+
+    downloadBtn.onclick = async () => {
+        if (!currentPdf) return;
+        downloadBtn.disabled = true;
+        document.getElementById('progressBox').classList.remove('hidden');
+        const progressBar = document.getElementById('progressBar');
+        
+        try {
+            const outPdf = new jsPDF({ orientation: 'p', unit: 'px', compress: true });
+            const quality = qualitySlider.value / 100;
+            const dpiScale = dpiSlider.value / 72;
+
+            for (let i = 1; i <= currentPdf.numPages; i++) {
+                const page = await currentPdf.getPage(i);
+                const viewport = page.getViewport({ scale: dpiScale });
+                const canvas = document.createElement('canvas');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                const ctx = canvas.getContext('2d');
+                
+                if (grayToggle.checked) ctx.filter = 'grayscale(100%)';
+                await page.render({ canvasContext: ctx, viewport }).promise;
+                
+                const imgData = canvas.toDataURL('image/jpeg', quality);
+                if (i > 1) outPdf.addPage([viewport.width, viewport.height], 'p');
+                else { outPdf.deletePage(1); outPdf.addPage([viewport.width, viewport.height], 'p'); }
+                
+                outPdf.addImage(imgData, 'JPEG', 0, 0, viewport.width, viewport.height, undefined, 'FAST');
+                progressBar.style.width = ((i / currentPdf.numPages) * 100) + "%";
+            }
+            outPdf.save(`compressed_${fileInput.files[0].name}`);
+        } catch (err) {
+            alert("Error: " + err.message);
+        } finally {
+            downloadBtn.disabled = false;
+            document.getElementById('progressBox').classList.add('hidden');
+        }
+    };
+</script>
+
+
+    
+    
+    <div class="ad">Advertisement</div></div></main>
+  
+  
+  <footer class="foot"><div class="c fg"><section><b>PDF Tools</b><p class="muted">Fast, private, browser-first PDF utilities.</p></section><section><b>Popular tools</b><div class="links"><a href="merge-pdf.html">Merge</a><a href="split-pdf.html">Split</a><a href="compress-pdf.html">Compress</a><a href="pdf-to-jpg.html">PDF to JPG</a></div></section><section><b>Information</b><div class="links"><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../faq.html">FAQ</a></div></section></div><div class="c muted" style="margin-top:25px">© <span data-year></span> PDF Tools</div></footer><script src="../js/tools/app.js" defer></script></body></html>
