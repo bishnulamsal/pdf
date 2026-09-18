@@ -1,1 +1,181 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rotate PDF — PDF Tools</title><meta name="description" content="Preview pages, select the pages you want, then rotate them."><link rel="canonical" href="https://pdf.bishnulamsal.com.np/tools/rotate-pdf.html"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="../css/main.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script type="module">import * as p from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";window.pdfjsLib=p;p.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";window.dispatchEvent(new Event("pdfjs-ready"));</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script><script src="../js/core.js" defer></script><script src="../js/file-utils.js" defer></script><script src="../js/pdf-engine.js" defer></script></head><body data-tool="rotate-pdf"><div class="loader"><div><div class="spinner"></div><div class="muted" style="text-align:center;margin-top:12px">Loading PDF workspace…</div></div></div><header class="h"><div class="c hi"><a class="brand" href="../"><span class="mark">PDF</span><span>PDF Tools</span></a><nav class="nav"><a href="../"><i class="fa-solid fa-house"></i> Home</a><a href="../#tools"><i class="fa-solid fa-grid-2"></i> Tools</a><a href="../about.html">About</a><a href="../faq.html">FAQ</a><button class="icon" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></nav><button class="icon mob" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></div></header><main class="shell"><div class="c"><div class="head fade-up"><div><span class="ey"><i class="fa-solid fa-bolt"></i> Browser-first tool</span><h1>Rotate PDF</h1><p class="muted">Preview pages, select the pages you want, then rotate them.</p></div><a class="btn ghost" href="../#tools"><i class="fa-solid fa-arrow-left"></i> All tools</a></div><div class="ad">Advertisement</div><div class="tool-layout"><section><div class="card workspace fade-up"><div class="drop" id="drop"><div><div class="drop-icon"><i class="fa-solid fa-rotate"></i></div><h2>Drop your PDF here</h2><p>or choose from your device — processing stays in your browser</p><button class="btn primary" id="choose"><i class="fa-solid fa-folder-open"></i> Choose PDF</button><input id="fileInput" class="sr-only" type="file" accept="application/pdf" ></div></div><div id="files" class="files"></div><div class="form"><div class="field"><label for="deg">Rotation</label><select id="deg"><option value="90">90° clockwise</option><option value="180">180°</option><option value="270">270° clockwise</option></select></div></div><div class="actions"><button id="run" class="btn primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Process & Download</button><button id="clear" class="btn ghost"><i class="fa-solid fa-rotate-left"></i> Reset</button></div><div class="progress-wrap"><div class="progress"><div id="progressBar" class="bar"></div></div><div class="meta"><span id="progressStatus">Ready when you are</span><span id="progressText">0%</span></div></div><div class="notice"><i class="fa-solid fa-lock"></i> Your selected files are processed locally in your browser. No upload endpoint is required for the core operations.</div></div></section><aside class="card workspace preview-panel fade-up"><div class="preview-toolbar"><div><strong><i class="fa-regular fa-eye"></i> Smart preview</strong><div class="muted" style="font-size:.8rem">Live, responsive and selection-aware</div></div><div class="preview-tools"><button class="icon" id="zoomOut" title="Zoom out"><i class="fa-solid fa-minus"></i></button><button class="icon" id="zoomReset" title="Reset zoom"><i class="fa-solid fa-expand"></i></button><button class="icon" id="zoomIn" title="Zoom in"><i class="fa-solid fa-plus"></i></button></div></div><div class="preview" id="preview"><div class="empty-preview"><div><i class="fa-regular fa-file-pdf"></i><div>Preview pages will appear here</div><small>Upload a PDF to preview, zoom and select pages.</small></div></div></div></aside></div><div class="ad">Advertisement</div></div></main><footer class="foot"><div class="c fg"><section><b>PDF Tools</b><p class="muted">Fast, private, browser-first PDF utilities.</p></section><section><b>Popular tools</b><div class="links"><a href="merge-pdf.html">Merge</a><a href="split-pdf.html">Split</a><a href="compress-pdf.html">Compress</a><a href="pdf-to-jpg.html">PDF to JPG</a></div></section><section><b>Information</b><div class="links"><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../faq.html">FAQ</a></div></section></div><div class="c muted" style="margin-top:25px">© <span data-year></span> PDF Tools</div></footer><script src="../js/tools/app.js" defer></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rotate PDF — PDF Tools</title><meta name="description" content="Preview pages, select the pages you want, then rotate them."><link rel="canonical" href="https://pdf.bishnulamsal.com.np/tools/rotate-pdf.html"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="../css/main.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script type="module">import * as p from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";window.pdfjsLib=p;p.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";window.dispatchEvent(new Event("pdfjs-ready"));</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script><script src="../js/core.js" defer></script><script src="../js/file-utils.js" defer></script><script src="../js/pdf-engine.js" defer></script></head><body data-tool="rotate-pdf"><div class="loader"><div><div class="spinner"></div><div class="muted" style="text-align:center;margin-top:12px">Loading PDF workspace…</div></div></div><header class="h"><div class="c hi"><a class="brand" href="../"><span class="mark">PDF</span><span>PDF Tools</span></a><nav class="nav"><a href="../"><i class="fa-solid fa-house"></i> Home</a><a href="../#tools"><i class="fa-solid fa-grid-2"></i> Tools</a><a href="../about.html">About</a><a href="../faq.html">FAQ</a><button class="icon" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></nav><button class="icon mob" data-theme aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button></div></header><main class="shell"><div class="c"><div class="head fade-up"><div><span class="ey"><i class="fa-solid fa-bolt"></i> Browser-first tool</span><h1>Rotate PDF</h1><p class="muted">Preview pages, select the pages you want, then rotate them.</p></div><a class="btn ghost" href="../#tools"><i class="fa-solid fa-arrow-left"></i> All tools</a></div><div class="ad">Advertisement</div><!--<div class='separator' style='display:none'> <img alt='QR Code Generator' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmX9BqPHlZUB-Gb8mpiMW9HMFo7mKjhtW1qDMsdjB9bEJUA2NYe8DU3SfNqinRtc5WHGgYmev2mbyXVTPLVmYsCXTaCuxkD3z3rFWbxsqKJ8fmQBdbzRbZ3cXzI4yAYkwUlO1bzudHKH93Z5uoMqRnIwpJhueBrDE6qUarIMaVAogSUQGU5NLJlgVKdlGn/s1600/pdf-to-image.png'/></div>--> 
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+
+    <style>
+        .orange-theme { background: #f97316; }
+        .page-card { transition: all 0.2s; }
+        .rotate-anim { transition: transform 0.3s ease; }
+        .loader { border-top-color: #f97316; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      .onPg .blogM .mainbar { max-width: 100%; }
+    </style>
+
+
+<div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[90vh]">
+    <div class="orange-theme p-6 text-white flex justify-between items-center shrink-0">
+        <div>
+            <h1 class="text-md font-black tracking-tighter uppercase">  <i class="fa-solid fa-layer-group text-white"></i> PDF & <span class="text-orange-200"> Image Merge</span></h1>
+            <p class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Stable Export Engine v4.0</p>
+        </div>
+        <div class="flex gap-3">
+            <button onclick="document.getElementById('fileInput').click()" class="bg-white text-orange-600 px-6 py-2 rounded-xl text-xs font-black shadow-lg hover:bg-orange-50 transition uppercase">Add Files</button>
+            <button id="exportBtn" disabled class="bg-slate-900 text-white px-6 py-2 rounded-xl text-xs font-black shadow-lg hover:bg-black disabled:bg-slate-300 transition uppercase">Download PDF</button>
+        </div>
+    </div>
+
+    <div id="workspace" class="flex-grow overflow-y-auto p-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 content-start bg-orange-50/10">
+        <div id="hint" class="col-span-full py-32 text-center text-orange-300">
+            <i class="fa-solid fa-file-export text-7xl mb-6 opacity-30"></i>
+            <p class="font-bold uppercase text-sm tracking-widest">Ready to Merge & Resize</p>
+        </div>
+    </div>
+</div>
+
+<input type="file" id="fileInput" class="hidden" accept=".pdf,image/*" multiple>
+
+<script>
+    const { PDFDocument, degrees, PageSizes } = PDFLib;
+    const workspace = document.getElementById('workspace');
+    const fileInput = document.getElementById('fileInput');
+    const exportBtn = document.getElementById('exportBtn');
+
+    let pageList = []; 
+
+    new Sortable(workspace, {
+        animation: 150,
+        onEnd: () => {
+            const currentIds = Array.from(workspace.querySelectorAll('.page-card')).map(el => el.id);
+            pageList = currentIds.map(id => pageList.find(p => p.id === id));
+        }
+    });
+
+    fileInput.onchange = async (e) => {
+        const files = Array.from(e.target.files);
+        if (!files.length) return;
+        document.getElementById('hint').classList.add('hidden');
+        exportBtn.disabled = false;
+
+        for (const file of files) {
+            const buffer = await file.arrayBuffer();
+            const safeData = new Uint8Array(buffer);
+
+            if (file.type === 'application/pdf') {
+                const pdf = await pdfjsLib.getDocument({ data: safeData.slice(0) }).promise;
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const id = "p" + Math.random().toString(36).substr(2, 9);
+                    const pObj = { id, type: 'pdf', data: safeData.slice(0), name: file.name, pageNum: i, rotation: 0 };
+                    pageList.push(pObj);
+                    await renderPdf(pObj, pdf);
+                }
+            } else {
+                const id = "i" + Math.random().toString(36).substr(2, 9);
+                const iObj = { id, type: 'img', data: safeData.slice(0), name: file.name, rotation: 0, mime: file.type };
+                pageList.push(iObj);
+                renderImg(iObj);
+            }
+        }
+    };
+
+    async function renderPdf(p, pdf) {
+        const page = await pdf.getPage(p.pageNum);
+        const viewport = page.getViewport({ scale: 0.3 });
+        const canvas = document.createElement('canvas');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        addCard(p, canvas.toDataURL());
+    }
+
+    function renderImg(p) {
+        const blob = new Blob([p.data], { type: p.mime });
+        addCard(p, URL.createObjectURL(blob));
+    }
+
+    function addCard(p, src) {
+        const card = document.createElement('div');
+        card.id = p.id;
+        card.className = "page-card bg-white rounded-2xl p-2 shadow-md relative group border-2 border-transparent hover:border-orange-500 cursor-grab";
+        card.innerHTML = `
+            <div class="aspect-[3/4] rounded-xl overflow-hidden bg-slate-100 flex items-center justify-center relative">
+                <img id="img-${p.id}" src="${src}" class="rotate-anim max-w-full max-h-full object-contain">
+                <div class="absolute inset-0 bg-orange-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+                    <button onclick="rot('${p.id}')" class="w-8 h-8 bg-white text-orange-600 rounded-lg shadow-lg"><i class="fa-solid fa-rotate-right"></i></button>
+                    <button onclick="del('${p.id}')" class="w-8 h-8 bg-white text-rose-500 rounded-lg shadow-lg"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <p class="text-[8px] font-bold text-slate-400 mt-2 truncate text-center uppercase tracking-tighter">${p.name}</p>
+        `;
+        workspace.appendChild(card);
+    }
+
+    window.rot = (id) => {
+        const p = pageList.find(x => x.id === id);
+        p.rotation = (p.rotation + 90) % 360;
+        document.getElementById(`img-${id}`).style.transform = `rotate(${p.rotation}deg)`;
+    };
+
+    window.del = (id) => {
+        pageList = pageList.filter(x => x.id !== id);
+        document.getElementById(id).remove();
+        if(!pageList.length) exportBtn.disabled = true;
+    };
+
+    exportBtn.onclick = async () => {
+        exportBtn.disabled = true;
+        exportBtn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin mr-2"></i> EXPORTING...`;
+
+        try {
+            const finalPdf = await PDFDocument.create();
+
+            for (const p of pageList) {
+                if (p.type === 'pdf') {
+                    const srcDoc = await PDFDocument.load(p.data.slice(0));
+                    const [copied] = await finalPdf.copyPages(srcDoc, [p.pageNum - 1]);
+                    if (p.rotation !== 0) copied.setRotation(degrees(copied.getRotation().angle + p.rotation));
+                    finalPdf.addPage(copied);
+                } else {
+                    const img = p.mime.includes('png') ? await finalPdf.embedPng(p.data.slice(0)) : await finalPdf.embedJpg(p.data.slice(0));
+                    const page = finalPdf.addPage(PageSizes.A4);
+                    const { width, height } = page.getSize();
+                    const scale = Math.min(width / img.width, height / img.height);
+                    const dW = img.width * scale;
+                    const dH = img.height * scale;
+                    page.drawImage(img, { x: (width - dW) / 2, y: (height - dH) / 2, width: dW, height: dH, rotate: degrees(p.rotation) });
+                }
+            }
+
+            // STABLE EXPORT METHOD
+            const pdfBytes = await finalPdf.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const downloadUrl = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = `Orange_A4_Export_${Date.now()}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            
+            // Cleanup
+            setTimeout(() => {
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(downloadUrl);
+            }, 100);
+
+        } catch (err) {
+            console.error("Critical Export Error:", err);
+            alert("Export failed. Try refreshing and uploading smaller files.");
+        } finally {
+            exportBtn.disabled = false;
+            exportBtn.innerHTML = `Download PDF`;
+        }
+    };
+</script>
+<div class="ad">Advertisement</div></div></main><footer class="foot"><div class="c fg"><section><b>PDF Tools</b><p class="muted">Fast, private, browser-first PDF utilities.</p></section><section><b>Popular tools</b><div class="links"><a href="merge-pdf.html">Merge</a><a href="split-pdf.html">Split</a><a href="compress-pdf.html">Compress</a><a href="pdf-to-jpg.html">PDF to JPG</a></div></section><section><b>Information</b><div class="links"><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../faq.html">FAQ</a></div></section></div><div class="c muted" style="margin-top:25px">© <span data-year></span> PDF Tools</div></footer><script src="../js/tools/app.js" defer></script></body></html>
