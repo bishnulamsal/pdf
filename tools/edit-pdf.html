@@ -1,1 +1,766 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Edit PDF — PDF Tools</title><meta name="description" content="Add text overlays."><link rel="canonical" href="https://pdf.bishnulamsal.com.np/tools/edit-pdf.html"><meta property="og:title" content="Edit PDF — PDF Tools"><meta property="og:description" content="Add text overlays."><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PDF Tools","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0"}}</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"><link rel="stylesheet" href="../css/main.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script type="module">import * as p from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";window.pdfjsLib=p;p.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";window.dispatchEvent(new Event("pdfjs-ready"));</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script><script src="../js/core.js" defer></script><script src="../js/file-utils.js" defer></script><script src="../js/pdf-engine.js" defer></script></head><body data-tool="edit-pdf"><header class="h"><div class="c hi"><a class="brand" href="../"><span class="mark">PDF</span>PDF Tools</a><nav class="nav"><a href="../">Home</a><a href="../#tools">Tools</a><a href="../about.html">About</a><a href="../faq.html">FAQ</a><button class="icon" data-theme>☾</button></nav><button class="icon mob" data-theme>☾</button></div></header><main class="shell"><div class="c"><div class="head"><div><span class="ey">Browser tool</span><h1>Edit PDF</h1><p class="muted">Add text overlays.</p></div><a class="btn" href="../#tools">← All tools</a></div><div class="ad">Advertisement</div><div class="drop" id="drop"><div><i class="fa-solid fa-pen-to-square"></i><input id="fileInput" class="sr-only" type="file" accept="application/pdf"><button class="btn primary" onclick="fileInput.click()">Choose PDF</button></div></div><div id="files" class="files"></div><div class="panel card form"><div><label>Text</label><input id="text" value="Edited text"></div><div><label>Size</label><input id="size" value="24"></div></div><div class="actions"><button id="run" class="btn primary">Process</button><button id="clear" class="btn">Clear</button></div><div class="progress"><div id="progressBar" class="bar"></div></div><div class="meta"><span id="progressStatus">Ready</span><span id="progressText">0%</span></div><div class="ad">Advertisement</div><p class="notice">Processing is designed to occur in your browser. External CDN libraries are loaded by your browser.</p></div></main><footer class="foot"><div class="c fg"><section><b>PDF Tools</b><p class="muted">Static, browser-first PDF utilities.</p></section><section><b>Tools</b><div class="links"><a href="merge-pdf.html">Merge</a><a href="split-pdf.html">Split</a><a href="compress-pdf.html">Compress</a><a href="pdf-to-jpg.html">PDF to JPG</a></div></section><section><b>Information</b><div class="links"><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../faq.html">FAQ</a></div></section></div><div class="c muted" style="margin-top:25px">© <span data-year></span> PDF Tools</div></footer><script src="../js/tools/app.js" defer></script></body></html>
+<!--[ Post Snippet ]--> <table class='tr-caption-container'>  <tbody>    <tr>      <td>        <img alt="Post with Fullpage Mode" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgo7hOcomG5ZMeCDTHJugdFtUikAndgs-LsQ6XnKtAgefqNwS0bJsEtJrzy-HHwg3ctNkx6KoWWsl7V3CLLhpTp41lBlR1QEzjeQ4BdsTTXgDIUDPl58TfVkWDijOidn1UXP7GFKmR4uSU7iuLebtWdYiV93hOKuudGDv08cWUVdSQgY8cMNrR2oG-f48ul/s1248/pdf-editor.jpeg"/>      </td>    </tr>    <tr>      <td class='tr-caption'>  </td>    </tr>  </tbody></table>  
+ 
+<p>This browser-based PDF editor makes it simple to manage your documents. Enjoy quick, easy, and private PDF editing — all right from your web browser!</p> 
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Styling */
+       
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+        .upload-section input[type="file"] {
+            border: 2px dashed #007bff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            font-size: 16px;
+            color: #007bff;
+            background-color: #e9f5ff;
+        }
+        .upload-section input[type="file"]:hover {
+            background-color: #d9ecff;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 123, 255, 0.3);
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        #pdf-pages-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            min-height: 200px; /* To show border even when empty */
+            background-color: #fdfdfd;
+            justify-content: center;
+        }
+
+        .pdf-page-thumbnail {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            background-color: #fff;
+            cursor: grab;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 10px; /* Space for page number */
+        }
+        .pdf-page-thumbnail.sortable-chosen {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            cursor: grabbing;
+        }
+        .pdf-page-thumbnail canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            background-color: #f0f0f0; /* Placeholder background */
+        }
+        .pdf-page-number {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            z-index: 10;
+        }
+        .delete-page-btn {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            opacity: 0.9;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        .delete-page-btn:hover {
+            background-color: #c82333;
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        .delete-page-btn:active {
+            transform: scale(0.95);
+        }
+
+        .insert-options {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 15px;
+            border: 1px dashed #007bff;
+            border-radius: 8px;
+            background-color: #e9f5ff;
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+        }
+        .insert-options label {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #0056b3;
+        }
+        .insert-options input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 80px;
+            text-align: center;
+        }
+        .insert-options .button-group {
+            margin-top: 10px;
+        }
+
+        #no-pages-message {
+            text-align: center;
+            color: #777;
+            margin-top: 50px;
+            font-size: 1.1em;
+        }
+
+        /* Message box for alerts */
+        .message-box-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .message-box-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .message-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .message-box p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .message-box button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .message-box button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .loading-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #007bff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            font-size: 1.2em;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+    </style>
+
+    <div class="container">
+        <div class="upload-section">
+            <input type="file" id="pdf-upload" accept="application/pdf">
+            <div class="button-group">
+                <button id="download-pdf-btn" disabled>Download Modified PDF</button>
+                <button id="add-pages-btn" disabled>Add Pages</button>
+            </div>
+            <div id="add-pages-options" class="insert-options">
+                <label for="add-pdf-upload">Upload PDF to add:</label>
+                <input type="file" id="add-pdf-upload" accept="application/pdf">
+                <label for="insert-position">Insert at page:</label>
+                <input type="number" id="insert-position" min="1" value="1">
+                <div class="button-group">
+                    <button id="confirm-add-pages">Confirm Add</button>
+                    <button id="cancel-add-pages" style="background-color: #6c757d;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>PDF Pages</h2>
+        <div id="pdf-pages-container">
+            <!-- PDF page thumbnails will be rendered here -->
+            <p id="no-pages-message">Upload a PDF to start editing.</p>
+        </div>
+    </div>
+
+    <!-- Message Box -->
+    <div id="message-box-overlay" class="message-box-overlay">
+        <div class="message-box">
+            <p id="message-box-text"></p>
+            <button id="message-box-ok">OK</button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Processing PDF...</div>
+    </div>
+
+    <!-- JavaScript Libraries (preferably served locally for offline use) -->
+    <!-- For simplicity, using CDN links here. Download these for production. -->
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.mjs" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+
+    <script type="module">
+        // Import PDF.js and its worker
+        import { getDocument, GlobalWorkerOptions } from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs';
+        GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.mjs';
+
+        const { PDFDocument } = PDFLib;
+
+        // --- DOM Elements ---
+        const pdfUploadInput = document.getElementById('pdf-upload');
+        const pdfPagesContainer = document.getElementById('pdf-pages-container');
+        const downloadPdfBtn = document.getElementById('download-pdf-btn');
+        const addPagesBtn = document.getElementById('add-pages-btn');
+        const addPagesOptions = document.getElementById('add-pages-options');
+        const addPdfUploadInput = document.getElementById('add-pdf-upload');
+        const insertPositionInput = document.getElementById('insert-position');
+        const confirmAddPagesBtn = document.getElementById('confirm-add-pages');
+        const cancelAddPagesBtn = document.getElementById('cancel-add-pages');
+        const noPagesMessage = document.getElementById('no-pages-message');
+
+        const messageBoxOverlay = document.getElementById('message-box-overlay');
+        const messageBoxText = document.getElementById('message-box-text');
+        const messageBoxOkBtn = document.getElementById('message-box-ok');
+
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        // --- Global State ---
+        let currentPdfDoc = null; // Stores the pdf-lib PDFDocument object
+        let pageReferences = []; // Array to store the actual page objects from currentPdfDoc, in their displayed order
+
+        // Initialize Sortable.js
+        let sortable = null;
+
+        // --- Utility Functions ---
+
+        /**
+         * Displays a custom message box instead of alert().
+         * @param {string} message The message to display.
+         */
+        const showMessageBox = (message) => {
+            messageBoxText.textContent = message;
+            messageBoxOverlay.classList.add('visible');
+        };
+
+        /**
+         * Hides the custom message box.
+         */
+        const hideMessageBox = () => {
+            messageBoxOverlay.classList.remove('visible');
+        };
+
+        /**
+         * Shows the loading overlay.
+         */
+        const showLoading = () => {
+            loadingOverlay.classList.add('visible');
+        };
+
+        /**
+         * Hides the loading overlay.
+         */
+        const hideLoading = () => {
+            loadingOverlay.classList.remove('visible');
+        };
+
+        /**
+         * Initializes or re-initializes Sortable.js for drag-and-drop reordering.
+         */
+        const initializeSortable = () => {
+            if (sortable) {
+                sortable.destroy(); // Destroy previous instance if it exists
+            }
+            sortable = Sortable.create(pdfPagesContainer, {
+                animation: 150,
+                ghostClass: 'sortable-ghost', // Class name for the drop placeholder
+                onEnd: function (evt) {
+                    // Update the pageReferences array order after drag-and-drop
+                    const [removed] = pageReferences.splice(evt.oldIndex, 1);
+                    pageReferences.splice(evt.newIndex, 0, removed);
+                    updatePageNumbers(); // Re-render page numbers on thumbnails
+                }
+            });
+        };
+
+        /**
+         * Renders a single PDF page onto a canvas and appends it to the container.
+         * @param {object} pdfJsDoc The PDF.js PDFDocumentProxy object.
+         * @param {number} pageIndex The 0-based index of the page to render.
+         * @param {HTMLElement} containerElement The DOM element to append the thumbnail to.
+         */
+        const renderPdfPage = async (pdfJsDoc, pageIndex, containerElement) => {
+            const page = await pdfJsDoc.getPage(pageIndex + 1); // PDF.js pages are 1-based
+            const viewport = page.getViewport({ scale: 0.3 }); // Adjust scale for thumbnail preview
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport,
+            };
+
+            await page.render(renderContext).promise;
+
+            const pageThumbnailDiv = document.createElement('div');
+            pageThumbnailDiv.classList.add('pdf-page-thumbnail');
+
+            const pageNumberSpan = document.createElement('span');
+            pageNumberSpan.classList.add('pdf-page-number');
+            pageNumberSpan.textContent = pageIndex + 1; // 1-based index for display
+
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-page-btn');
+            deleteButton.textContent = 'X';
+            deleteButton.title = 'Delete Page';
+            deleteButton.onclick = (e) => {
+                e.stopPropagation(); // Prevent drag from triggering delete
+                // Get the current display index from the DOM element
+                const displayIndex = Array.from(pdfPagesContainer.children).indexOf(pageThumbnailDiv);
+                if (displayIndex !== -1) {
+                    deletePage(displayIndex);
+                }
+            };
+
+            pageThumbnailDiv.appendChild(canvas);
+            pageThumbnailDiv.appendChild(pageNumberSpan);
+            pageThumbnailDiv.appendChild(deleteButton);
+            containerElement.appendChild(pageThumbnailDiv);
+        };
+
+        /**
+         * Renders all pages from the currentPdfDoc into the UI.
+         * @param {object} pdfLibDoc The pdf-lib PDFDocument object.
+         */
+        const renderAllPages = async (pdfLibDoc) => {
+            showLoading();
+            pdfPagesContainer.innerHTML = ''; // Clear existing thumbnails
+            noPagesMessage.style.display = 'none';
+
+            if (!pdfLibDoc || pdfLibDoc.getPageCount() === 0) {
+                noPagesMessage.style.display = 'block';
+                downloadPdfBtn.disabled = true;
+                addPagesBtn.disabled = true;
+                hideLoading();
+                return;
+            }
+
+            downloadPdfBtn.disabled = false;
+            addPagesBtn.disabled = false;
+
+            try {
+                // Convert pdf-lib document to PDF.js compatible document for rendering
+                const pdfBytes = await pdfLibDoc.save();
+                const pdfJsDoc = await getDocument({ data: pdfBytes }).promise;
+
+                // Use an array to hold all render promises to render concurrently
+                const renderPromises = [];
+                for (let i = 0; i < pdfLibDoc.getPageCount(); i++) {
+                    renderPromises.push(renderPdfPage(pdfJsDoc, i, pdfPagesContainer));
+                }
+                await Promise.all(renderPromises);
+                updatePageNumbers(); // Ensure page numbers are correct after rendering
+                initializeSortable(); // Re-initialize Sortable after DOM updates
+            } catch (error) {
+                console.error("Error rendering PDF pages:", error);
+                showMessageBox("Failed to render PDF pages. Please try uploading another file.");
+                noPagesMessage.style.display = 'block';
+                downloadPdfBtn.disabled = true;
+                addPagesBtn.disabled = true;
+            } finally {
+                hideLoading();
+            }
+        };
+
+        /**
+         * Updates the displayed page numbers on each thumbnail.
+         */
+        const updatePageNumbers = () => {
+            const thumbnails = pdfPagesContainer.querySelectorAll('.pdf-page-thumbnail');
+            thumbnails.forEach((thumb, index) => {
+                thumb.querySelector('.pdf-page-number').textContent = index + 1;
+            });
+        };
+
+        /**
+         * Deletes a page from the current PDF and re-renders.
+         * @param {number} displayIndex The 0-based index of the page to delete in the current display order.
+         */
+        const deletePage = async (displayIndex) => {
+            showMessageBox(`Are you sure you want to delete page ${displayIndex + 1}?`);
+            messageBoxOkBtn.onclick = async () => { // Re-assign OK button handler for confirmation
+                hideMessageBox();
+                if (displayIndex < 0 || displayIndex >= pageReferences.length) {
+                    console.error("Invalid page index for deletion.");
+                    showMessageBox("Error: Invalid page selected for deletion.");
+                    return;
+                }
+
+                showLoading();
+                try {
+                    // Remove the page from our internal pageReferences array
+                    pageReferences.splice(displayIndex, 1);
+
+                    // Create a new PDF document and copy pages in the new order
+                    const newPdfDoc = await PDFDocument.create();
+                    for (const pageRef of pageReferences) {
+                        const [copiedPage] = await newPdfDoc.copyPages(currentPdfDoc, [currentPdfDoc.getPages().indexOf(pageRef)]);
+                        newPdfDoc.addPage(copiedPage);
+                    }
+
+                    currentPdfDoc = newPdfDoc; // Update the current PDF document
+                    pageReferences = currentPdfDoc.getPages(); // Update pageReferences to the new document's pages
+                    await renderAllPages(currentPdfDoc); // Re-render previews
+                } catch (error) {
+                    console.error("Error deleting page:", error);
+                    showMessageBox("Failed to delete page. Please try again.");
+                } finally {
+                    hideLoading();
+                }
+            };
+        };
+
+        // --- Event Listeners ---
+
+        // Handle initial PDF upload
+        pdfUploadInput.addEventListener('change', async (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                showLoading();
+                try {
+                    const arrayBuffer = await file.arrayBuffer();
+                    currentPdfDoc = await PDFDocument.load(arrayBuffer);
+                    pageReferences = currentPdfDoc.getPages(); // Store references to the actual page objects
+                    await renderAllPages(currentPdfDoc);
+                } catch (error) {
+                    console.error("Error loading PDF:", error);
+                    showMessageBox("Failed to load PDF. Please ensure it's a valid PDF file.");
+                    currentPdfDoc = null;
+                    pageReferences = [];
+                    renderAllPages(currentPdfDoc); // Clear UI
+                } finally {
+                    hideLoading();
+                }
+            }
+        });
+
+        // Toggle "Add Pages" options visibility
+        addPagesBtn.addEventListener('click', () => {
+            addPagesOptions.style.display = 'flex'; // Use flex to maintain layout
+            if (currentPdfDoc) {
+                insertPositionInput.max = currentPdfDoc.getPageCount() + 1;
+                insertPositionInput.value = currentPdfDoc.getPageCount() + 1; // Default to append
+            } else {
+                insertPositionInput.max = 1;
+                insertPositionInput.value = 1;
+            }
+        });
+
+        // Cancel adding pages
+        cancelAddPagesBtn.addEventListener('click', () => {
+            addPagesOptions.style.display = 'none';
+            addPdfUploadInput.value = ''; // Clear file input
+        });
+
+        // Confirm adding pages
+        confirmAddPagesBtn.addEventListener('click', async () => {
+            const file = addPdfUploadInput.files[0];
+            const insertIndex = parseInt(insertPositionInput.value) - 1; // Convert to 0-based index
+
+            if (!file) {
+                showMessageBox('Please select a PDF file to add.');
+                return;
+            }
+            if (insertIndex < 0 || (currentPdfDoc && insertIndex > currentPdfDoc.getPageCount())) {
+                showMessageBox('Invalid insert position. Position must be between 1 and ' + (currentPdfDoc ? currentPdfDoc.getPageCount() + 1 : 1) + '.');
+                return;
+            }
+
+            showLoading();
+            try {
+                const newPdfBytes = await file.arrayBuffer();
+                const newPdf = await PDFDocument.load(newPdfBytes);
+
+                const mergedPdf = await PDFDocument.create();
+                const pagesToCopyFromCurrent = currentPdfDoc ? await mergedPdf.copyPages(currentPdfDoc, currentPdfDoc.getPageIndices()) : [];
+                const pagesToCopyFromNew = await mergedPdf.copyPages(newPdf, newPdf.getPageIndices());
+
+                let newPageReferences = [];
+
+                // Add pages before the insert position
+                for (let i = 0; i < insertIndex && i < pagesToCopyFromCurrent.length; i++) {
+                    mergedPdf.addPage(pagesToCopyFromCurrent[i]);
+                    newPageReferences.push(currentPdfDoc.getPages()[i]); // Keep original reference
+                }
+
+                // Add pages from the new PDF
+                for (const newPage of pagesToCopyFromNew) {
+                    mergedPdf.addPage(newPage);
+                    // For newly added pages, we don't have an original reference in currentPdfDoc.
+                    // We will update pageReferences to reflect the new mergedPdf's actual pages after it's set.
+                }
+
+                // Add remaining pages from the original PDF (if any)
+                for (let i = insertIndex; i < pagesToCopyFromCurrent.length; i++) {
+                    mergedPdf.addPage(pagesToCopyFromCurrent[i]);
+                    newPageReferences.push(currentPdfDoc.getPages()[i]); // Keep original reference
+                }
+
+                currentPdfDoc = mergedPdf; // The new merged PDF becomes the current working document
+                pageReferences = currentPdfDoc.getPages(); // Update pageReferences to reflect the actual pages in the new currentPdfDoc
+
+                await renderAllPages(currentPdfDoc);
+                addPagesOptions.style.display = 'none';
+                addPdfUploadInput.value = ''; // Clear file input
+            } catch (error) {
+                console.error("Error adding pages:", error);
+                showMessageBox("Failed to add pages. Please try again.");
+            } finally {
+                hideLoading();
+            }
+        });
+
+        // Handle downloading the modified PDF
+        downloadPdfBtn.addEventListener('click', async () => {
+            if (!currentPdfDoc || pageReferences.length === 0) {
+                showMessageBox('No PDF to download.');
+                return;
+            }
+
+            showLoading();
+            try {
+                // Create a new PDF document and copy pages in the reordered/modified sequence
+                const finalPdfDoc = await PDFDocument.create();
+                for (const pageRef of pageReferences) {
+                    // Find the index of the pageRef within the currentPdfDoc's original pages
+                    const originalPageIndex = currentPdfDoc.getPages().indexOf(pageRef);
+                    if (originalPageIndex !== -1) {
+                         const [copiedPage] = await finalPdfDoc.copyPages(currentPdfDoc, [originalPageIndex]);
+                         finalPdfDoc.addPage(copiedPage);
+                    } else {
+                        // This case should ideally not happen if pageReferences is always updated correctly
+                        // But as a fallback, if a pageRef isn't found, log an error.
+                        console.warn("Page reference not found in currentPdfDoc. Skipping page.");
+                    }
+                }
+
+                const pdfBytes = await finalPdfDoc.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'modified_pdf.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url); // Clean up the URL object
+            } catch (error) {
+                console.error("Error downloading PDF:", error);
+                showMessageBox("Failed to download PDF. Please try again.");
+            } finally {
+                hideLoading();
+            }
+        });
+
+        // Message box OK button listener
+        messageBoxOkBtn.addEventListener('click', hideMessageBox);
+
+        // Initial setup
+        noPagesMessage.style.display = 'block'; // Ensure message is visible on load
+        downloadPdfBtn.disabled = true;
+        addPagesBtn.disabled = true;
+    </script>
+
+
+
+
+<section id="about-tool" style="max-width: 900px; margin: 0 auto; padding: 2rem; font-family: Arial, sans-serif; line-height: 1.6;">
+  <h1 style="font-size: 2rem; font-weight: bold; color: #2c3e50;">Easy PDF Editing: Your New Tool Right in Your Browser!</h1>
+  <p>Do you ever need to quickly change a PDF, but hate downloading special software or uploading your files to websites you don't trust? What if you could fix your PDFs right here, in your web browser, without anyone else seeing your documents?</p>
+
+  <p><strong>Good news!</strong> We've made a super easy tool that lets you edit PDFs right in your browser. It's fast, private, and simple to use!</p>
+
+  <h2 style="font-size: 1.5rem; color: #34495e;">What Can This Tool Do?</h2>
+  <p>This handy web tool helps you with common PDF tasks:</p>
+  <ul>
+    <li><strong>Upload Your PDF:</strong> Just pick any PDF file from your computer to get started.</li>
+    <li><strong>See All Your Pages:</strong> You'll see all its pages as small pictures (thumbnails).</li>
+    <li><strong>Delete Pages Easily:</strong> Click the 'X' button on any page picture to remove it.</li>
+    <li><strong>Add New Pages:</strong> Upload pages from another PDF and insert them anywhere.</li>
+    <li><strong>Move Pages Around (Drag & Drop):</strong> Rearrange your PDF pages like puzzle pieces.</li>
+    <li><strong>Download Your Finished PDF:</strong> Save your edited PDF right back to your computer.</li>
+  </ul>
+
+  <p><strong>The best part?</strong> Everything happens directly in your browser. Your files stay on your computer, so they're safe and private.</p>
+
+  <h2 style="font-size: 1.5rem; color: #34495e;">How to Use This PDF Editor</h2>
+  <ol>
+    <li><strong>Open the Tool:</strong> Save the special HTML code as an <code>.html</code> file (like <code>my-pdf-tool.html</code>) and open it in your browser.</li>
+    <li><strong>Upload Your First PDF:</strong>
+      <ul>
+        <li>Click the upload box or drag a PDF file onto it.</li>
+        <li>You’ll see thumbnail previews of all your pages below.</li>
+      </ul>
+    </li>
+    <li><strong>Delete a Page:</strong>
+      <ul>
+        <li>Hover over a thumbnail and click the 'X' button.</li>
+        <li>Click "OK" when asked to confirm.</li>
+      </ul>
+    </li>
+    <li><strong>Move Pages Around:</strong>
+      <ul>
+        <li>Click and hold a page thumbnail, drag it to the new position, and release.</li>
+      </ul>
+    </li>
+    <li><strong>Add More Pages:</strong>
+      <ul>
+        <li>Click the "Add Pages" button and upload another PDF.</li>
+        <li>Choose where to insert it by typing a page number.</li>
+        <li>Click "Confirm Add" to insert pages or "Cancel" to undo.</li>
+      </ul>
+    </li>
+    <li><strong>Download Your Edited PDF:</strong>
+      <ul>
+        <li>Click the "Download Modified PDF" button when you're finished.</li>
+        <li>The new file will be saved to your computer.</li>
+      </ul>
+    </li>
+  </ol>
+
+ 
+
+  <h2 style="font-size: 1.5rem; color: #34495e;">Start Editing Your PDFs Today!</h2>
+  <p>This browser-based PDF editor makes it simple to manage your documents. Enjoy quick, easy, and private PDF editing — all right from your web browser!</p>
+</section>
+
+ 
